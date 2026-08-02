@@ -7,6 +7,7 @@ const uploadRoutes = require('./routes/uploadRoutes');
 // const chatRoutes = require('./routes/chatRoutes');
 
 const logger = require('./middlewares/logger');
+const checkDbConnection = require('./middlewares/checkDbConnection');
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
 const app = express();
@@ -20,6 +21,11 @@ app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 // Serve static uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
+
+// DB health check guard for API routes
+app.use('/api', checkDbConnection);
+app.use('/login', checkDbConnection);
+app.use('/register', checkDbConnection);
 
 app.use('/api/courses', courseRoutes);
 app.use('/api/upload', uploadRoutes);

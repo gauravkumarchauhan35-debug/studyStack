@@ -11,6 +11,14 @@ if (process.platform === 'win32') {
   }
 }
 
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err.message);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.warn('MongoDB disconnected');
+});
+
 const connectDB = async () => {
   const dbUri = process.env.DATABASE || process.env.MONGODB_URI;
   if (!dbUri) {
