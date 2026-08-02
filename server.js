@@ -8,13 +8,14 @@ const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(PORT, () => {
-      console.log(`Express server is live on port ${PORT}`);
-    });
   } catch (error) {
-    console.error('Failed to start server', error.message);
-    process.exit(1);
+    console.error('Database connection error:', error.message);
+    console.log('Starting server in offline/disconnected mode...');
   }
+  
+  app.listen(PORT, () => {
+    console.log(`Express server is live on port ${PORT}`);
+  });
 };
 
 startServer();
