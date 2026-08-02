@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 const dns = require('dns');
 
-// Fix for Windows DNS querySrv ECONNREFUSED issues with MongoDB Atlas
-try {
-  dns.setDefaultResultOrder('ipv4first');
-  dns.setServers(['8.8.8.8', '1.1.1.1']);
-} catch (err) {
-  console.log('DNS config warning:', err.message);
+// Fix for Windows DNS querySrv issues
+if (process.platform === 'win32') {
+  try {
+    dns.setDefaultResultOrder('ipv4first');
+    dns.setServers(['8.8.8.8', '1.1.1.1']);
+  } catch (err) {
+    console.log('DNS config warning:', err.message);
+  }
 }
 
 const connectDB = async () => {
