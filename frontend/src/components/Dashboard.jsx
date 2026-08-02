@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../apiConfig';
 
 export default function Dashboard({ user, token, showToast, openCourseModal, openUserModal, activeTab, setActiveTab }) {
   const [courses, setCourses] = useState([]);
@@ -15,7 +16,7 @@ export default function Dashboard({ user, token, showToast, openCourseModal, ope
   const fetchCourses = async () => {
     setCoursesLoading(true);
     try {
-      const res = await fetch('/api/courses');
+      const res = await fetch(`${API_BASE_URL}/api/courses`);
       if (!res.ok) throw new Error('Failed to fetch courses');
       const data = await res.json();
       setCourses(data);
@@ -30,7 +31,7 @@ export default function Dashboard({ user, token, showToast, openCourseModal, ope
     if (!isInstructor) return;
     setUsersLoading(true);
     try {
-      const res = await fetch('/api/users', {
+      const res = await fetch(`${API_BASE_URL}/api/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to fetch users');
@@ -53,7 +54,7 @@ export default function Dashboard({ user, token, showToast, openCourseModal, ope
   const handleDeleteCourse = async (id) => {
     if (!confirm('Are you sure you want to delete this course?')) return;
     try {
-      const res = await fetch(`/api/courses/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/courses/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -68,7 +69,7 @@ export default function Dashboard({ user, token, showToast, openCourseModal, ope
   const handleDeleteUser = async (id) => {
     if (!confirm('Are you sure you want to delete this user?')) return;
     try {
-      const res = await fetch(`/api/users/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/users/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

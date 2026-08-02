@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../apiConfig';
 
 export default function UserModal({ editUser, token, onClose, onSuccess, showToast }) {
   const [name, setName] = useState('');
@@ -33,7 +34,7 @@ export default function UserModal({ editUser, token, onClose, onSuccess, showToa
       return;
     }
 
-    const url = isEdit ? `/api/users/${editUser._id}` : '/api/users';
+    const url = isEdit ? `${API_BASE_URL}/api/users/${editUser._id}` : `${API_BASE_URL}/api/users`;
     const method = isEdit ? 'PUT' : 'POST';
 
     try {

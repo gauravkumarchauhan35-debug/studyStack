@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../apiConfig';
 
 export default function CourseModal({ course, token, onClose, onSuccess, showToast }) {
   const [title, setTitle] = useState('');
@@ -34,7 +35,7 @@ export default function CourseModal({ course, token, onClose, onSuccess, showToa
     showToast('Uploading image from device...', 'success');
 
     try {
-      const res = await fetch('/api/upload', {
+      const res = await fetch(`${API_BASE_URL}/api/upload`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData
@@ -55,7 +56,7 @@ export default function CourseModal({ course, token, onClose, onSuccess, showToa
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = { title, price: Number(price), instructor, image };
-    const url = isEdit ? `/api/courses/${course._id}` : '/api/courses';
+    const url = isEdit ? `${API_BASE_URL}/api/courses/${course._id}` : `${API_BASE_URL}/api/courses`;
     const method = isEdit ? 'PUT' : 'POST';
 
     try {
