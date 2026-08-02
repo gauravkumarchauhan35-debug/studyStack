@@ -73,53 +73,54 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-slate-950 text-slate-100 transition-colors duration-300 font-sans selection:bg-cyan-500 selection:text-slate-950 overflow-x-hidden">
       
-      {/* Aurora floating blurred glows */}
-      <div className="absolute top-0 right-[10%] w-[350px] h-[350px] bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse duration-[6000ms]"></div>
-      <div className="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] bg-violet-500/10 dark:bg-violet-500/5 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse duration-[8000ms]"></div>
+      {/* Premium Aurora background effects */}
+      <div className="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] bg-gradient-to-br from-indigo-600/20 via-purple-600/15 to-transparent rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-glow"></div>
+      <div className="fixed bottom-[-10%] left-[-5%] w-[550px] h-[550px] bg-gradient-to-tr from-cyan-500/15 via-blue-600/10 to-transparent rounded-full blur-[140px] pointer-events-none -z-10 animate-pulse-glow" style={{ animationDelay: '3s' }}></div>
+      <div className="fixed top-[40%] left-[30%] w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
 
       {/* Toast Alerts */}
       {toast && (
-        <div className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-xl font-medium text-sm shadow-xl border bg-white/95 dark:bg-slate-900/95 backdrop-blur-md transition-all duration-300 transform scale-100 animate-in fade-in slide-in-from-top-6 ${
+        <div className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-xs shadow-2xl backdrop-blur-xl border transition-all duration-300 transform scale-100 animate-in fade-in slide-in-from-top-6 ${
           toast.type === 'success' 
-            ? 'border-emerald-500/30 text-emerald-600 dark:text-emerald-400 shadow-emerald-500/5' 
-            : 'border-rose-500/30 text-rose-600 dark:text-rose-400 shadow-rose-500/5'
+            ? 'border-emerald-500/40 bg-slate-900/90 text-emerald-400 shadow-emerald-500/10' 
+            : 'border-rose-500/40 bg-slate-900/90 text-rose-400 shadow-rose-500/10'
         }`}>
           {toast.type === 'success' ? (
-            <div className="w-5 h-5 flex items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
+            <div className="w-6 h-6 flex items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
               <i className="fa-solid fa-check text-xs"></i>
             </div>
           ) : (
-            <div className="w-5 h-5 flex items-center justify-center rounded-full bg-rose-500/10 text-rose-500">
+            <div className="w-6 h-6 flex items-center justify-center rounded-xl bg-rose-500/15 text-rose-400 border border-rose-500/30">
               <i className="fa-solid fa-triangle-exclamation text-xs"></i>
             </div>
           )}
-          <span>{toast.message}</span>
+          <span className="tracking-wide">{toast.message}</span>
         </div>
       )}
 
       {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-white/75 dark:bg-slate-950/75 border-b border-slate-200/50 dark:border-slate-800/50 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2.5 text-xl font-bold tracking-tight select-none">
-              <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/20">
-                <i className="fa-solid fa-graduation-cap text-base"></i>
+      <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/60 shadow-lg shadow-black/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-3 text-xl font-bold tracking-tight select-none cursor-pointer">
+              <div className="w-10 h-10 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
+                <i className="fa-solid fa-graduation-cap text-lg"></i>
               </div>
-              <span className="font-outfit text-2xl font-extrabold bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 dark:from-white dark:via-indigo-200 dark:to-white bg-clip-text text-transparent">
-                Study<span className="text-indigo-600 dark:text-indigo-400">Stack</span>
+              <span className="font-outfit text-2xl font-black text-white tracking-tight">
+                Study<span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">Stack</span>
               </span>
             </div>
 
             {token && user && (
-              <nav className="flex items-center gap-1.5 ml-4">
+              <nav className="flex items-center gap-2 bg-slate-900/90 p-1 rounded-2xl border border-slate-800/80">
                 <button
                   onClick={() => setActiveTab('courses')}
-                  className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-200 ${
+                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 ${
                     activeTab === 'courses' 
-                      ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/20' 
-                      : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white'
+                      ? 'text-white bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 shadow-md shadow-indigo-500/20 font-extrabold' 
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                   }`}
                 >
                   Courses
@@ -127,10 +128,10 @@ export default function App() {
                 {user.role === 'instructor' && (
                   <button
                     onClick={() => setActiveTab('users')}
-                    className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-200 ${
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 ${
                       activeTab === 'users' 
-                        ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/20' 
-                        : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white'
+                        ? 'text-white bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 shadow-md shadow-indigo-500/20 font-extrabold' 
+                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                     }`}
                   >
                     Users
@@ -140,32 +141,21 @@ export default function App() {
             )}
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* Theme Toggle Button */}
-            <button 
-              onClick={toggleTheme}
-              className="w-9.5 h-9.5 flex items-center justify-center border border-slate-200 dark:border-slate-800/80 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white transition duration-200"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? (
-                <i className="fa-regular fa-sun text-base animate-spin-slow"></i>
-              ) : (
-                <i className="fa-regular fa-moon text-base"></i>
-              )}
-            </button>
-
+          <div className="flex items-center gap-4">
             {token && user && (
               <div className="flex items-center gap-3">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900 text-xs font-semibold rounded-full border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-300 shadow-sm animate-in fade-in duration-200">
-                  <i className="fa-solid fa-circle-user text-indigo-500 text-sm"></i>
-                  <span>{user.name}</span>
-                  <span className="px-2 py-0.5 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 text-[10px] uppercase rounded-md font-bold tracking-wider">
+                <div className="flex items-center gap-2.5 px-3.5 py-1.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-inner">
+                  <div className="w-7 h-7 flex items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 text-white text-xs font-bold">
+                    {user.name ? user.name[0].toUpperCase() : 'U'}
+                  </div>
+                  <span className="text-xs font-bold text-slate-200">{user.name}</span>
+                  <span className="px-2 py-0.5 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-[10px] uppercase rounded-lg font-black tracking-widest">
                     {user.role}
                   </span>
-                </span>
+                </div>
                 <button 
                   onClick={handleLogout}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-850 hover:text-rose-600 dark:hover:text-rose-400 text-xs font-semibold text-slate-700 dark:text-slate-300 rounded-xl border border-slate-200/50 dark:border-slate-800/50 transition"
+                  className="flex items-center gap-2 px-3.5 py-2 bg-slate-900/80 hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 text-xs font-bold rounded-2xl border border-slate-800/80 hover:border-rose-500/30 transition-all duration-200"
                 >
                   <i className="fa-solid fa-right-from-bracket"></i> Logout
                 </button>
